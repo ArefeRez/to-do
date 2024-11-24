@@ -1,18 +1,90 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.body{
+  background-color: #FFEBEE;
+}
 .navbar{
-    background-color: #FFEBEE;
   color: #333333;
   padding: 1rem;
+  border-bottom: 1px solid #c4bdbd;
 }
 .navbar input{
-    font-family: 'Light';
+  font-family: 'Light';
 }
 .navbar-brand{
-    font-family: 'SemiBold';
+  font-family: 'SemiBold';
 }
 .navbar button{
-    background-color: #A5D6A7;
+  background-color: #A5D6A7;
   color: #FFFFFF;
   font-family: 'Light';
+}
+.sidebar{
+  font-family: 'Light';
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.task-item {
+  list-style: none;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #FFCDD2;
+  border: 1px solid #dee2e6;
+  border-radius: 50px;
+  font-family: 'Regular';
+  transition: background-color 0.3s ease;
+}
+
+.task-item.checked {
+  text-decoration: line-through;
+  color: #333333;
+  background-color: #A5D6A7;
+}
+
+.btn-action {
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 1.5rem;
+  color: #333333;
+  transition: color 0.3s ease;
+}
+
+.btn-action:hover {
+  color: #000;
+}
+
+.action-icons {
+  display: inline-flex;
+  gap: 5px;
+}
+
+#dayDisplay {
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  color: #333333;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.sidebar .active {
+  background-color: #FFEBEE;
+  color: #333333;
+  padding: 10px;
+  border-radius: 50px;
+  width: 70%;
+}
+#sidebar{
+  align-items: center;
 }
 
 
