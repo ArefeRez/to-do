@@ -1,0 +1,21 @@
+.navbar{
+    background-color: #FFEBEE;
+  color: #333333;
+  padding: 1rem;
+}
+.navbar input{
+    font-family: 'Light';
+}
+.navbar-brand{
+    font-family: 'SemiBold';
+}
+.navbar button{
+    background-color: #A5D6A7;
+  color: #FFFFFF;
+  font-family: 'Light';
+}
+
+
+
+
+

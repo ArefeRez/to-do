@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Light';
+    src: url('../font/static/SourGummy-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Medium';
+    src: url('../font/static/SourGummy-Medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Black';
+    src: url('../font/static/SourGummy-Black.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Regular';
+    src: url('../font/static/SourGummy-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'SemiBold';
+    src: url('../font/static/SourGummy-SemiBold.ttf') format('truetype');
+}
+
+
+/* body {
+    background-color: #FFEBEE;
+    color: #333333;
+  }
+  button {
+    background-color: #A5D6A7;
+    color: #FFFFFF;
+  }
+  .completed {
+    color: #FFCDD2;
+    text-decoration: line-through;
+  }
+   */
