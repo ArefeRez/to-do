@@ -1,121 +1,161 @@
 document.addEventListener("DOMContentLoaded", function () {
     const taskInput = document.getElementById("taskInput");
-    const taskList = document.getElementById("box");
     const addTaskButton = document.getElementById("addTaskButton");
+    const myDayTasks = document.getElementById("myDayTasks");
+    const importantTasks = document.getElementById("importantTasks");
+    const myDayContent = document.getElementById("myDayContent");
+    const importantContent = document.getElementById("importantContent");
+    const waterContent = document.getElementById("waterContent");
+    const waterSection = document.getElementById("waterSection");
+    const sidebarItems = document.querySelectorAll('.task-list-item');
     const dayDisplay = document.getElementById("dayDisplay");
-    const myDayElement = document.getElementById("myDay");
+    const body = document.body;
 
-    // فعال کردن My Day به صورت پیش‌فرض
-    myDayElement.classList.add("active");
+    const glasses = document.querySelectorAll('.glass');
+    const box = document.getElementById('waterBox');
+    const message = document.getElementById('message');
+    let filledGlasses = 0;
 
-    // افزودن وظیفه با کلیک روی دکمه
-    addTaskButton.addEventListener("click", function (event) {
-        event.preventDefault(); // جلوگیری از ارسال فرم
-        addTask();
-    });
-
-    // افزودن وظیفه با تغییر ورودی
-    taskInput.addEventListener("change", function () {
-        addTask();
-    });
-
-    // تابع افزودن وظیفه
-    function addTask() {
-        const inputValue = taskInput.value;
-        if (inputValue.trim() !== "") {
-            const li = document.createElement("li");
-            li.classList.add("task-item");
-            li.innerHTML = `
-                ${inputValue} 
-                <span class="action-icons">
-                    <i class="bi bi-check2 btn-action"></i>
-                    <i class="bi bi-trash btn-action"></i>
-                </span>
-            `;
-            taskList.appendChild(li);
-            taskInput.value = ""; // پاک کردن ورودی پس از افزودن
-
-            // ذخیره وظیفه در LocalStorage
-            saveTasksToLocalStorage();
-        }
-    }
-
-    // ذخیره وظایف در LocalStorage
-    function saveTasksToLocalStorage() {
-        const tasks = [];
-        document.querySelectorAll(".task-item").forEach(task => {
-            tasks.push({
-                text: task.innerText,
-                checked: task.classList.contains("checked")
-            });
+    function setActiveSidebarItem(clickedItem) {
+        sidebarItems.forEach(item => {
+            item.classList.remove("active");
         });
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+
+        clickedItem.classList.add("active");
     }
 
-    // بارگذاری وظایف از LocalStorage
-    function loadTasksFromLocalStorage() {
-        const tasks = JSON.parse(localStorage.getItem("tasks"));
-        if (tasks) {
-            tasks.forEach(taskData => {
-                const li = document.createElement("li");
-                li.classList.add("task-item");
-                li.innerHTML = `
-                    ${taskData.text}
-                    <span class="action-icons">
-                        <i class="bi bi-check2 btn-action"></i>
-                        <i class="bi bi-trash btn-action"></i>
-                    </span>
-                `;
-                if (taskData.checked) {
-                    li.classList.add("checked");
-                }
-                taskList.appendChild(li);
-            });
+    waterSection.addEventListener("click", function () {
+        setActiveSidebarItem(waterSection);
+
+        waterContent.style.display = "block";
+        myDayContent.style.display = "none";
+        importantContent.style.display = "none";
+
+        body.style.backgroundColor = "#E1F5FE";
+
+        taskInput.disabled = true;
+    });
+
+    const myDaySection = document.getElementById("myDaySection");
+    const importantSection = document.getElementById("importantSection");
+
+    myDaySection.addEventListener("click", function () {
+        setActiveSidebarItem(myDaySection);
+        myDayContent.style.display = "block";
+        importantContent.style.display = "none";
+        waterContent.style.display = "none";
+
+        body.style.backgroundColor = "";
+
+        taskInput.disabled = false;
+    });
+
+    importantSection.addEventListener("click", function () {
+        setActiveSidebarItem(importantSection);
+        importantContent.style.display = "block";
+        myDayContent.style.display = "none";
+        waterContent.style.display = "none";
+
+        body.style.backgroundColor = "";
+
+        taskInput.disabled = false;
+    });
+
+    function addTask() {
+        const inputValue = taskInput.value.trim();
+        if (inputValue === "") return;
+
+        const li = document.createElement("li");
+        li.classList.add("task-item");
+        li.innerHTML = `
+            ${inputValue}
+            <span class="action-icons">
+                <i class="bi bi-check2 btn-action"></i>
+                <i class="bi bi-trash btn-action"></i>
+            </span>
+        `;
+
+        if (myDayContent.style.display === "block") {
+            myDayTasks.appendChild(li);
+        } else if (importantContent.style.display === "block") {
+            importantTasks.appendChild(li);
+        } else if (waterContent.style.display === "block") {
+            const waterTasks = document.getElementById("waterTasks");
+            waterTasks.appendChild(li);
         }
+
+        taskInput.value = "";
     }
 
-    // مدیریت حذف وظیفه
-    taskList.addEventListener("click", function (event) {
-        if (event.target.classList.contains("bi-trash")) {
-            const parentLi = event.target.closest("li");
-            parentLi.style.transition = "opacity 0.2s ease";
-            parentLi.style.opacity = 0;
-            setTimeout(() => {
-                parentLi.remove();
-                saveTasksToLocalStorage(); // ذخیره‌سازی پس از حذف
-            }, 200); // حذف بعد از انیمیشن
-        }
+    addTaskButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        addTask();
     });
 
-    // تغییر وضعیت به "انجام‌شده"
-    taskList.addEventListener("click", function (event) {
-        if (event.target.classList.contains("bi-check2")) {
-            const parentLi = event.target.closest("li");
-            parentLi.classList.toggle("checked");
-            saveTasksToLocalStorage(); // ذخیره‌سازی پس از تغییر وضعیت
-        }
-    });
-
-    // تابع برای گرفتن روز و تاریخ
     function displayDate() {
         const today = new Date();
-        
-        // لیست روزهای هفته
         const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const dayName = daysOfWeek[today.getDay()]; // دریافت روز هفته
-        const date = today.getDate(); // روز ماه
-        const month = today.getMonth() + 1; // ماه (از 0 شروع می‌شود)
-        const year = today.getFullYear(); // سال
-
-        // نمایش روز، تاریخ و ماه
-        dayDisplay.innerHTML = `${dayName}, ${date}/${month}/${year}`;
+        const dayName = daysOfWeek[today.getDay()];
+        const date = today.getDate();
+        const month = today.getMonth() + 1;
+        const year = today.getFullYear();
+        dayDisplay.textContent = `${dayName}, ${date}/${month}/${year}`;
     }
 
-    displayDate(); // نمایش تاریخ و روز هنگام بارگذاری صفحه
+    displayDate();
 
-    // بارگذاری وظایف از LocalStorage هنگام بارگذاری صفحه
-    loadTasksFromLocalStorage();
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("bi-trash")) {
+            const parentLi = event.target.closest("li");
+            parentLi.remove();
+        } else if (event.target.classList.contains("bi-check2")) {
+            const parentLi = event.target.closest("li");
+            parentLi.classList.toggle("checked");
+        }
+    });
+
+    myDaySection.click();
+
+    glasses.forEach((glass, index) => {
+        glass.addEventListener("click", function () {
+            if (!glass.classList.contains("filled")) {
+                glass.classList.add("filled");
+                glass.classList.add("selected"); // Add selected class for gray shadow
+                filledGlasses++;
+                box.style.height = `${(filledGlasses / 8) * 100}%`;
+
+                if (filledGlasses === 8) {
+                    message.style.display = "block";
+                }
+            } else {
+                glass.classList.remove("selected"); // Remove selected class if already filled
+            }
+        });
+    });
+
+    waterSection.addEventListener("click", function () {
+        filledGlasses = 0;
+        glasses.forEach(glass => {
+            glass.classList.remove("filled");
+            glass.classList.remove("selected"); // Reset selected class
+        });
+        box.style.height = "0%";
+        message.style.display = "none";
+    });
 });
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
 
 
 
