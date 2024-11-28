@@ -27,6 +27,11 @@
   font-family: 'Light';
 }
 
+.dark-mode{
+  border: none;
+  border-radius: 50px;
+  font-size: 1.2rem;
+}
 .sidebar {
   font-family: 'Light';
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
@@ -112,69 +117,96 @@ h2{
   background-color: #E1F5FE;
   border-radius: 10px;
   overflow: hidden;
-}
-
-#boxImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-#glasses {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
   margin-top: 20px;
+  border: 1px solide #333333;
+}
+
+#waterLevel {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 0%;
+  background-image: url(../img/06f35b9bf52ca79976f21590fda044be.jpg);
+  background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+  transition: height 0.3s ease;
+  border: 1px solide #333333;
 }
 
 .glass-container {
   position: relative;
   width: 40px;
   height: 80px;
+  margin-right: 10px;
+  margin-bottom: 10px; /* فاصله بین لیوان‌ها */
 }
 
 .glass {
   width: 100%;
   height: 100%;
   border-radius: 5px;
+  background-color: #BBDEFB;
   cursor: pointer;
   transition: background-color 0.3s;
-  transition: filter 0.3s ease;
+}
+#glasses img{
+  width: 100%;
+  height: 100%;
 }
 
 .glass.filled {
   background-color: #2196F3;
   filter: grayscale(100%) blur(1px);
 }
+
 .glass.selected {
-  box-shadow: 0 0 10px rgba(189, 184, 184, 0.8); /* Add gray shadow on click */
+  box-shadow: 0 0 10px rgba(189, 184, 184, 0.8);
 }
 
-.tick-box {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 20px;
-  height: 20px;
-  background-color: transparent;
-  border: 2px solid #2196F3;
-  border-radius: 50%;
-  margin-left: 10px;
-  display: none; /* Initially hidden */
-}
-
-.tick-box.checked {
-  background-color: #4CAF50;
-  border-color: #4CAF50;
-  display: block;
-}
 
 #message {
+  vertical-align: middle;
+ margin: 0 auto;
   font-family: 'SemiBold';
   margin-top: 20px;
-  font-size: 30px;
+  font-size: 50px;
   text-align: center;
   color: #333333;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .body {
+    padding: 10px;
+  }
+  #dayDisplay {
+    top: 10px;
+    right: 10px;
+  }
 }
 
 
