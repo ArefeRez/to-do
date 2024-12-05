@@ -118,6 +118,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   displayDate();  // Display the current date when the page loads
 
+
+  const darkModeButton = document.getElementById("darkModeButton");
+
+  darkModeButton.addEventListener("click", function () {
+    document.body.classList.toggle("dark-mode");
+  });
   document.addEventListener("click", function (event) {
     if (event.target.classList.contains("bi-trash")) {
       const parentLi = event.target.closest("li");
