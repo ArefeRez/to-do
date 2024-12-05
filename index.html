@@ -31,7 +31,9 @@
           />
           <button id="addTaskButton" class="btn" type="submit">Add</button>
         </form>
-        <button class="dark-mode py-2 px-4 "><i class="bi bi-brightness-alt-high"></i></button>
+        <button class="dark-mode py-2 px-4">
+          <i class="bi bi-brightness-alt-high"></i>
+        </button>
       </div>
     </nav>
     <!--section-->
@@ -50,6 +52,11 @@
             <i class="bi bi-droplet mx-3"></i>
             <li id="water" class="task-list-item">Water</li>
           </div>
+          <div id="calendarSection" class="d-flex my-3">
+            <i class="bi bi-calendar-heart mx-3"></i>
+          <li id="calendar" class="task-list-item">Calendar</li>
+        </div>
+        </div>
         </ul>
       </div>
 
@@ -66,46 +73,67 @@
         <!-- water -->
         <div id="waterContent" style="display: none">
           <h2>Water</h2>
-<div class="d-flex">
-<div id="waterBox">
-  <div id="waterLevel"></div>
-</div>
-<div id="message" style="display: none">Well done!</div>
-</div>
-<div id="glasses" class="d-flex mt-2">
-  <div class="glass-container">
-    <div class="glass" data-index="1"><img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt=""></div>
-  </div>
-  <div class="glass-container">
-    <div class="glass" data-index="2"><img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt=""></div>
-  </div>
-  <div class="glass-container">
-    <div class="glass" data-index="3"><img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt=""></div>
-  </div>
-  <div class="glass-container">
-    <div class="glass" data-index="4"><img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt=""></div>
-  </div>
-  <div class="glass-container">
-    <div class="glass" data-index="5"><img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt=""></div>
-  </div>
-  <div class="glass-container">
-    <div class="glass" data-index="6"><img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt=""></div>
-  </div>
-  <div class="glass-container">
-    <div class="glass" data-index="7"><img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt=""></div>
-  </div>
-  <div class="glass-container">
-    <div class="glass" data-index="8"><img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt=""></div>
-  </div>
-</div>
-
+          <div class="d-flex">
+            <div id="waterBox">
+              <div id="waterLevel"></div>
+            </div>
+            <div id="message" style="display: none">Well done!</div>
           </div>
-
+          <div id="glasses" class="d-flex mt-2">
+            <div class="glass-container">
+              <div class="glass" data-index="1">
+                <img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt="" />
+              </div>
+            </div>
+            <div class="glass-container">
+              <div class="glass" data-index="2">
+                <img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt="" />
+              </div>
+            </div>
+            <div class="glass-container">
+              <div class="glass" data-index="3">
+                <img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt="" />
+              </div>
+            </div>
+            <div class="glass-container">
+              <div class="glass" data-index="4">
+                <img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt="" />
+              </div>
+            </div>
+            <div class="glass-container">
+              <div class="glass" data-index="5">
+                <img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt="" />
+              </div>
+            </div>
+            <div class="glass-container">
+              <div class="glass" data-index="6">
+                <img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt="" />
+              </div>
+            </div>
+            <div class="glass-container">
+              <div class="glass" data-index="7">
+                <img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt="" />
+              </div>
+            </div>
+            <div class="glass-container">
+              <div class="glass" data-index="8">
+                <img src="./img/9c151ba450bfae8e1a750c920a9367ec.jpg" alt="" />
+              </div>
+            </div>
+          </div>
           
         </div>
-      </div>
+        
+        
 
-      <div id="dayDisplay" class="col-2"></div>
+      <!-- Display Date -->
+<div id="dayDisplay" class="col-2"></div>
+
+<!-- Task Counter -->
+<div id="taskCounter" class="task-counter col-2">
+  <span id="totalTasks">0</span> / <span id="completedTasks">0</span> tasks completed
+</div>
+
     </section>
 
     <script src="./bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
